@@ -44,10 +44,10 @@ class RegisterActivity : AppCompatActivity() {
             Log.d("RegisterActivity", "Foto selecionada")
 
             selectedPhotoUri = data.data
+
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
 
 //            selectphoto_imageview_register.setImageBitmap(bitmap)
-//
 //            selectphoto_imageview_register.alpha = 0f
 
             val bitmapDrawable = BitmapDrawable(bitmap)
@@ -111,6 +111,10 @@ class RegisterActivity : AppCompatActivity() {
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("RegisterActivity", "Salvou user no banco de dados")
+                val intent = Intent(this, LatestMessagesActivity::class.java)
+                //se clicar em voltar, não volta pra activity de registro
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
     }
 }
