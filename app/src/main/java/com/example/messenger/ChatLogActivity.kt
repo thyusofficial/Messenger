@@ -14,6 +14,10 @@ class ChatLogActivity : AppCompatActivity() {
         setContentView(R.layout.activity_chat_log)
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         supportActionBar?.title = user.username
+        setupDummyData()
+    }
+
+    private fun setupDummyData(){
         val adapter = GroupAdapter<ViewHolder>()
         adapter.add(ChatFromItem())
         adapter.add(ChatToItem())
